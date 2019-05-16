@@ -13,4 +13,4 @@ process = os.oscsin(frq*1), os.oscsin(frq*2),
            _ * (sqrt(pan1)), _ * (sqrt(pan2)), 
            _ * (sqrt(pan3)), _ * (sqrt(pan4)) :
            _ + _, _ + _,  _ + _, _ + _ :
-           _ + _, _ + _;
+           _ + _, _ + _; _ + _, _ + _ : _*(0.25), _*(0.25)
