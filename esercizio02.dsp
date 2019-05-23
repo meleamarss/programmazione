@@ -1,5 +1,8 @@
 import("stdfaust.lib");
 
+envelop = abs : max ~ -(1.0/ma.SR) : max(ba.db2linear(-70)) : ba.linear2db;
+vmeter(x) = attach(x, envelop(x) : vbargraph("[5][unit:dB]", -70, +5));
+
 mastergroup(x) = vgroup("[1]", x);
 
 maingroup(x) = mastergroup(hgroup("[2]", x));
@@ -28,5 +31,6 @@ process = os.oscsin(frq*1), os.oscsin(frq*2),
           _ * (sqrt(1-pan3)), _ *  (sqrt(1-pan4)),
           _ * (sqrt(pan1)), _ * (sqrt(pan2)),
           _ * (sqrt(pan3)), _ * (sqrt(pan4)) :
+          vmeter, vmeter, vmeter, vmeter, vmeter, vmeter, vmeter, vmeter :
           _ + _, _+ _, _+ _, _+ _ :
-          _ + _, _+ _ : _ *(0.25), _ *(0.25);		
+          _ + _, _+ _ : _ *(0.25), _ *(0.25);
